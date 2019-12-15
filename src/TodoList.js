@@ -36,18 +36,16 @@ class TodoList extends Component {
   }
 
   getTodoItem() {
-    return (
-      this.state.list.map((item, index) => {
-        return (
-          <TodoItem
-            key={index}
-            item={item}
-            index={index}
-            deleteItem={this.handleItemClick}
-          />
-        );
-      })
-    );
+    return this.state.list.map((item, index) => {
+      return (
+        <TodoItem
+          key={index}
+          item={item}
+          index={index}
+          deleteItem={this.handleItemClick}
+        />
+      );
+    });
   }
 
   handleInputChange(e) {
