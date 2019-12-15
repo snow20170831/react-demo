@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
+import TodoList from './TodoList';
 import * as serviceWorker from './serviceWorker';
 
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -95,61 +96,61 @@ import * as serviceWorker from './serviceWorker';
 // );
 
 // 提取组件：将组件拆分为更小的组件
-function formatDate(date) {
-  return date.toLocaleDateString();
-}
+// function formatDate(date) {
+//   return date.toLocaleDateString();
+// }
 
-function Avatar(props) {
-  return (
-    <img className="Avatar"
-      src={props.user.avatarUrl}
-      alt={props.user.name}
-    />
-  );
-}
+// function Avatar(props) {
+//   return (
+//     <img className="Avatar"
+//       src={props.user.avatarUrl}
+//       alt={props.user.name}
+//     />
+//   );
+// }
 
-function UserInfo(props) {
-  return (
-    <div className="UserInfo">
-      <Avatar user={props.user} />
-      <div className="UserInfo-name">
-        {props.user.name}
-      </div>
-    </div>
-  );
-}
+// function UserInfo(props) {
+//   return (
+//     <div className="UserInfo">
+//       <Avatar user={props.user} />
+//       <div className="UserInfo-name">
+//         {props.user.name}
+//       </div>
+//     </div>
+//   );
+// }
 
-function Comment(props) {
-  return (
-    <div className="Comment">
-      <UserInfo user={props.author} />
-      <div className="Comment-text">
-        {props.text}
-      </div>
-      <div className="Comment-date">
-        {formatDate(props.date)}
-      </div>
-    </div>
-  );
-}
+// function Comment(props) {
+//   return (
+//     <div className="Comment">
+//       <UserInfo user={props.author} />
+//       <div className="Comment-text">
+//         {props.text}
+//       </div>
+//       <div className="Comment-date">
+//         {formatDate(props.date)}
+//       </div>
+//     </div>
+//   );
+// }
 
-const comment = {
-  author: {
-    name: 'Hello Kitty',
-    avatarUrl: 'https://placekitten.com/g/64/64'
-  },
-  text: 'Hello World !',
-  date: new Date()
-};
+// const comment = {
+//   author: {
+//     name: 'Hello Kitty',
+//     avatarUrl: 'https://placekitten.com/g/64/64'
+//   },
+//   text: 'Hello World !',
+//   date: new Date()
+// };
 
-ReactDOM.render(
-  <Comment 
-    author={comment.author}
-    text={comment.text}
-    date={comment.date}
-  />,
-  document.getElementById('root')
-);
+// ReactDOM.render(
+//   <Comment 
+//     author={comment.author}
+//     text={comment.text}
+//     date={comment.date}
+//   />,
+//   document.getElementById('root')
+// );
 
 // State & 生命周期
 
@@ -158,4 +159,9 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
+
+ReactDOM.render(
+  <TodoList />,
+  document.getElementById('root')
+);
 serviceWorker.unregister();
