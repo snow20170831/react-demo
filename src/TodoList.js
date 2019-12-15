@@ -8,7 +8,10 @@ class TodoList extends Component {
     this.state = {
       inputValue: '',
       list: []
-    }
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleBtnClick = this.handleBtnClick.bind(this);
+    this.handleItemClick = this.handleItemClick.bind(this);
   }
 
   render() {
@@ -21,50 +24,60 @@ class TodoList extends Component {
             id="insertArea"
             className="input"
             value={this.state.inputValue}
-            onChange={this.handleInputChange.bind(this)}
+            onChange={this.handleInputChange}
           />
-          <button onClick={this.handleBtnClick.bind(this)}>提交</button>
+          <button onClick={this.handleBtnClick}>提交</button>
         </div>
         <ul>
-          {this.state.list.map((item, index) => {
-            return (
-              <div>
-                <TodoItem item={item} index={index} deleteItem={this.handleItemClick.bind(this)}/>
-                {/*<li
-                  key={index}
-                  onClick={this.handleItemClick.bind(this, index)}
-                  dangerouslySetInnerHTML={{__html: item}}>
-                </li>*/}
-              </div>
-            );
-          })}
+          {this.getTodoItem()}
         </ul>
       </Fragment>
     )
   }
 
+  getTodoItem() {
+    return (
+      this.state.list.map((item, index) => {
+        return (
+          <TodoItem
+            key={index}
+            item={item}
+            index={index}
+            deleteItem={this.handleItemClick}
+          />
+        );
+      })
+    );
+  }
+
   handleInputChange(e) {
     e.persist();
-    this.setState({
-      inputValue: e.target.value
-    });
+    const value = e.target.value;
+    this.setState(() => ({
+      inputValue: value
+    }));
   }
 
   handleBtnClick() {
-    const list = [...this.state.list, this.state.inputValue];
-    this.setState({
-      list: list,
-      inputValue: ''
+    this.setState((prevState) => {
+      const list = [...prevState.list, prevState.inputValue];
+      return {
+        list,
+        inputValue: ''
+      };
     });
   }
 
   handleItemClick(index) {
     // immutable: state 不允许我们做任何的改变
     // const list = this.state.list;
-    const list = [...this.state.list];
-    list.splice(index, 1);
-    this.setState({
-      list: list
+    
+    this.setState((prevState) => {
+      const list = [...prevState.list];
+      list.splice(index, 1);
+      return {
+        list
+      };
     });
   }
 }
